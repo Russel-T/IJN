@@ -1,4 +1,10 @@
-import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  Outlet,
+  NavLink,
+  Link,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { useState } from "react";
 import {
   FiMenu,
@@ -55,7 +61,7 @@ export default function Sidebar() {
 
         {/* Menu */}
         <nav className="mt-6 flex flex-col flex-1">
-          {menuItems.map((item) => (
+          {/* {menuItems.map((item) => (
             <Link key={item.label} to={item.to}>
               <SidebarItem
                 icon={item.icon}
@@ -64,6 +70,18 @@ export default function Sidebar() {
                 active={location.pathname === item.to}
               />
             </Link>
+          ))} */}
+          {menuItems.map((item) => (
+            <NavLink key={item.label} to={item.to}>
+              {({ isActive }) => (
+                <SidebarItem
+                  icon={item.icon}
+                  label={item.label}
+                  open={open}
+                  active={isActive} // <-- highlight automatically
+                />
+              )}
+            </NavLink>
           ))}
 
           {/* Sign Out at bottom */}
