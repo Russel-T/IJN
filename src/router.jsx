@@ -3,19 +3,28 @@ import App from "./App";
 import Signup from "./components/Signup";
 import Signin from "./components/Signin";
 import Dashboard from "./components/Dashboard";
+import Receipts from "./components/Receipts";
+import Materials from "./components/Materials";
+import VendorCategory from "./components/VendorDirectory";
 import PrivateRoute from "./components/PrivateRoute";
+import Sidebar from "./components/Sidebar";
+
 export const router = createBrowserRouter([
-  { path: "/", element: <App /> },
   { path: "/", element: <App /> },
   { path: "/signup", element: <Signup /> },
   { path: "/signin", element: <Signin /> },
+
   {
-    path: "/dashboard",
     element: (
       <PrivateRoute>
-        {" "}
-        <Dashboard />{" "}
+        <Sidebar />
       </PrivateRoute>
     ),
+    children: [
+      { path: "/dashboard", element: <Dashboard /> },
+      { path: "/receipts", element: <Receipts /> },
+      { path: "/materials", element: <Materials /> },
+      { path: "/vendors", element: <VendorCategory /> },
+    ],
   },
 ]);
